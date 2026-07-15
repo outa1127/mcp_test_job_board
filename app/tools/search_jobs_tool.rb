@@ -18,9 +18,9 @@ class SearchJobsTool < MCP::Tool
       remote_only: {
         type: "boolean",
         description: "trueの場合、リモート可の求人のみ返す"
-      },
-      required: []
-    }
+      }
+    },
+    required: []
   )
 
   class << self

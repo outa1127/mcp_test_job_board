@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+# bin/mcp
+
+# ============================================================
+# 最重要ポイント:
+# stdio トランスポートでは stdout は JSON-RPC 専用。
+# Rails の起動メッセージやログが stdout に混ざると
+# Claude Desktop 側でパースエラーになり接続に失敗する。
+# 環境読み込みの「前に」stdout 汚染対策を行う。
+# ============================================================
+
+ENV["RAILS_ENV"] ||= "development"
+#Railsのログを標準出力に出さないようにする
+ENV["RAILS_LOG_TO_STDOUT"] = "false"
+
+require_relative "../config/environment"
+
+Rails.logger = ActiveSupport::Logger.new($stderr)
+ActiveRecord::Base.logger = Rails.logger
+
+require "mcp"
+require "mcp/server/transports/stdio_transport"
+
+server = MCP::Server.new(
+  name: "job_board",
+  version: "1.0.0",
+  tools: [
+    SearchJobsTool,
+    GetJobDetailTool,
+    ListCompaniesTool
+  ]
+)
+
+transport = MCP::Server::Transports::StdioTransport.new(server)
+transport.open
