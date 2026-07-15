@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  company: one
+  title: MyString
+  description: MyText
+  salary_min: 1
+  salary_max: 1
+  tech_stack: MyString
+  remote_ok: false
+
+two:
+  company: two
+  title: MyString
+  description: MyText
+  salary_min: 1
+  salary_max: 1
+  tech_stack: MyString
+  remote_ok: false
