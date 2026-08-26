@@ -49,4 +49,4 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 end
 
-gem "mcp", "~> 0.24.0"
+gem "mcp", "~> 1.3.0"
